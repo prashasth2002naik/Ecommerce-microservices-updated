@@ -1,0 +1,3 @@
+INSERT INTO users (username, email, password, address) VALUES ('john_doe', 'john@example.com', 'password123', '123 Main St, City');
+INSERT INTO users (username, email, password, address) VALUES ('jane_smith', 'jane@example.com', 'password456', '456 Oak Ave, Town');
+INSERT INTO users (username, email, password, address) VALUES ('bob_wilson', 'bob@example.com', 'password789', '789 Pine Rd, Village');
