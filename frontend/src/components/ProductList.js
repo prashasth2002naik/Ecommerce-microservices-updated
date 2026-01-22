@@ -9,9 +9,10 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  // ✅ Fetch products through API Gateway using relative URL
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://localhost:8081/api/products');
+      const response = await axios.get('/api/products');
       setProducts(response.data);
       setLoading(false);
     } catch (error) {
@@ -25,8 +26,9 @@ const ProductList = () => {
   return (
     <div>
       <h2>Products</h2>
+
       <div className="product-grid">
-        {products.map(product => (
+        {products.map((product) => (
           <div key={product.id} className="product-card">
             <img src={product.imageUrl} alt={product.name} />
             <h3>{product.name}</h3>

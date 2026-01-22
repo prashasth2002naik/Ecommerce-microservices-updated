@@ -9,9 +9,10 @@ const OrderList = () => {
     fetchOrders();
   }, []);
 
+  // ✅ Fetch orders through API Gateway using relative URL
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('http://localhost:8082/api/orders');
+      const response = await axios.get('/api/orders');
       setOrders(response.data);
       setLoading(false);
     } catch (error) {
@@ -25,6 +26,7 @@ const OrderList = () => {
   return (
     <div>
       <h2>Orders</h2>
+
       <table className="order-table">
         <thead>
           <tr>
@@ -36,14 +38,19 @@ const OrderList = () => {
             <th>Order Date</th>
           </tr>
         </thead>
+
         <tbody>
-          {orders.map(order => (
+          {orders.map((order) => (
             <tr key={order.id}>
               <td>{order.id}</td>
               <td>{order.productId}</td>
               <td>{order.quantity}</td>
               <td>${order.totalPrice}</td>
-              <td><span className={`status ${order.status.toLowerCase()}`}>{order.status}</span></td>
+              <td>
+                <span className={`status ${order.status.toLowerCase()}`}>
+                  {order.status}
+                </span>
+              </td>
               <td>{new Date(order.orderDate).toLocaleString()}</td>
             </tr>
           ))}
