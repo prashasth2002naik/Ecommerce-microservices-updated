@@ -1,0 +1,59 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+# API Gateway
+- task: Docker@2
+  inputs:
+    command: buildAndPush
+    repository: prashasthnaik/apigateway
+    dockerfile: apigateway/Dockerfile
+    tags: latest
+
+# Eureka
+- task: Docker@2
+  inputs:
+    command: buildAndPush
+    repository: prashasthnaik/eureka
+    dockerfile: eureka/Dockerfile
+    tags: latest
+
+# Frontend
+- task: Docker@2
+  inputs:
+    command: buildAndPush
+    repository: prashasthnaik/frontend
+    dockerfile: frontend/Dockerfile
+    tags: latest
+
+# Order service
+- task: Docker@2
+  inputs:
+    command: buildAndPush
+    repository: prashasthnaik/order
+    dockerfile: order-service/Dockerfile
+    tags: latest
+
+# Product service
+- task: Docker@2
+  inputs:
+    command: buildAndPush
+    repository: prashasthnaik/product
+    dockerfile: product-service/Dockerfile
+    tags: latest
+
+# User service
+- task: Docker@2
+  inputs:
+    command: buildAndPush
+    repository: prashasthnaik/user
+    dockerfile: user-service/Dockerfile
+    tags: latest
+
+
+- script: |
+    docker-compose up -d
