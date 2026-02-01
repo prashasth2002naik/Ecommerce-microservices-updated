@@ -6,7 +6,12 @@ pool:
 
 steps:
 
-# API Gateway
+# ---- API Gateway Tests ----
+- script: |
+    cd apigateway
+    mvn test
+
+# ---- Build & Push API Gateway ----
 - task: Docker@2
   inputs:
     command: buildAndPush
@@ -14,7 +19,13 @@ steps:
     dockerfile: apigateway/Dockerfile
     tags: latest
 
-# Eureka
+
+# ---- Eureka Tests ----
+- script: |
+    cd eureka
+    mvn test
+
+# ---- Build & Push Eureka ----
 - task: Docker@2
   inputs:
     command: buildAndPush
@@ -22,7 +33,15 @@ steps:
     dockerfile: eureka/Dockerfile
     tags: latest
 
-# Frontend
+
+# ---- Frontend Build Test ----
+- script: |
+    cd frontend
+    npm install
+    npm test
+
+
+# ---- Build & Push Frontend ----
 - task: Docker@2
   inputs:
     command: buildAndPush
@@ -30,7 +49,12 @@ steps:
     dockerfile: frontend/Dockerfile
     tags: latest
 
-# Order service
+
+# ---- Order Service ----
+- script: |
+    cd order-service
+    mvn test
+
 - task: Docker@2
   inputs:
     command: buildAndPush
@@ -38,7 +62,12 @@ steps:
     dockerfile: order-service/Dockerfile
     tags: latest
 
-# Product service
+
+# ---- Product Service ----
+- script: |
+    cd product-service
+    mvn test
+
 - task: Docker@2
   inputs:
     command: buildAndPush
@@ -46,14 +75,15 @@ steps:
     dockerfile: product-service/Dockerfile
     tags: latest
 
-# User service
+
+# ---- User Service ----
+- script: |
+    cd user-service
+    mvn test
+
 - task: Docker@2
   inputs:
     command: buildAndPush
     repository: prashasthnaik/user
     dockerfile: user-service/Dockerfile
     tags: latest
-
-
-- script: |
-    docker-compose up -d
