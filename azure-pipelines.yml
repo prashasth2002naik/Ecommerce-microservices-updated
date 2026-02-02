@@ -17,7 +17,7 @@ steps:
   inputs:
     command: buildAndPush
     repository: prashasthnaik/apigateway
-    dockerfile: apigateway/Dockerfile
+    dockerfile: api-gateway/Dockerfile
     tags: latest
 
 
@@ -32,7 +32,7 @@ steps:
   inputs:
     command: buildAndPush
     repository: prashasthnaik/eureka
-    dockerfile: eureka/Dockerfile
+    dockerfile: eureka-server/Dockerfile
     tags: latest
 
 
