@@ -9,7 +9,7 @@ steps:
 # ================= API Gateway =================
 
 - script: mvn test
-  workingDirectory: apigateway
+  workingDirectory: api-gateway
   displayName: API Gateway - Run Tests
 
 - task: Docker@2
@@ -24,7 +24,7 @@ steps:
 # ================= Eureka =================
 
 - script: mvn test
-  workingDirectory: eureka
+  workingDirectory: eureka-server
   displayName: Eureka - Run Tests
 
 - task: Docker@2
