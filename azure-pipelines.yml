@@ -6,13 +6,14 @@ pool:
 
 steps:
 
-# ---- API Gateway Tests ----
-- script: |
-    cd apigateway
-    mvn test
+# ================= API Gateway =================
 
-# ---- Build & Push API Gateway ----
+- script: mvn test
+  workingDirectory: apigateway
+  displayName: API Gateway - Run Tests
+
 - task: Docker@2
+  displayName: API Gateway - Build & Push
   inputs:
     command: buildAndPush
     repository: prashasthnaik/apigateway
@@ -20,13 +21,14 @@ steps:
     tags: latest
 
 
-# ---- Eureka Tests ----
-- script: |
-    cd eureka
-    mvn test
+# ================= Eureka =================
 
-# ---- Build & Push Eureka ----
+- script: mvn test
+  workingDirectory: eureka
+  displayName: Eureka - Run Tests
+
 - task: Docker@2
+  displayName: Eureka - Build & Push
   inputs:
     command: buildAndPush
     repository: prashasthnaik/eureka
@@ -34,15 +36,16 @@ steps:
     tags: latest
 
 
-# ---- Frontend Build Test ----
+# ================= Frontend =================
+
 - script: |
-    cd frontend
     npm install
     npm test
+  workingDirectory: frontend
+  displayName: Frontend - Build & Test
 
-
-# ---- Build & Push Frontend ----
 - task: Docker@2
+  displayName: Frontend - Build & Push
   inputs:
     command: buildAndPush
     repository: prashasthnaik/frontend
@@ -50,12 +53,14 @@ steps:
     tags: latest
 
 
-# ---- Order Service ----
-- script: |
-    cd order-service
-    mvn test
+# ================= Order Service =================
+
+- script: mvn test
+  workingDirectory: order-service
+  displayName: Order Service - Run Tests
 
 - task: Docker@2
+  displayName: Order Service - Build & Push
   inputs:
     command: buildAndPush
     repository: prashasthnaik/order
@@ -63,12 +68,14 @@ steps:
     tags: latest
 
 
-# ---- Product Service ----
-- script: |
-    cd product-service
-    mvn test
+# ================= Product Service =================
+
+- script: mvn test
+  workingDirectory: product-service
+  displayName: Product Service - Run Tests
 
 - task: Docker@2
+  displayName: Product Service - Build & Push
   inputs:
     command: buildAndPush
     repository: prashasthnaik/product
@@ -76,12 +83,14 @@ steps:
     tags: latest
 
 
-# ---- User Service ----
-- script: |
-    cd user-service
-    mvn test
+# ================= User Service =================
+
+- script: mvn test
+  workingDirectory: user-service
+  displayName: User Service - Run Tests
 
 - task: Docker@2
+  displayName: User Service - Build & Push
   inputs:
     command: buildAndPush
     repository: prashasthnaik/user
