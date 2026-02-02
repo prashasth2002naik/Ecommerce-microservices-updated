@@ -12,13 +12,14 @@ steps:
   workingDirectory: api-gateway
   displayName: API Gateway - Run Tests
 
-# - task: Docker@2
-#   displayName: API Gateway - Build & Push
-#   inputs:
-#     command: buildAndPush
-#     repository: prashasthnaik/apigateway
-#     dockerfile: api-gateway/Dockerfile
-#     tags: latest
+- task: Docker@2
+  displayName: API Gateway - Build & Push
+  inputs:
+    command: buildAndPush
+    containerRegistry: dockerhub
+    repository: prashasthnaik/apigateway
+    dockerfile: api-gateway/Dockerfile
+    tags: latest
 
 
 # ================= Eureka =================
