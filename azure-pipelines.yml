@@ -28,13 +28,14 @@ steps:
   workingDirectory: eureka-server
   displayName: Eureka - Run Tests
 
-# - task: Docker@2
-#   displayName: Eureka - Build & Push
-#   inputs:
-#     command: buildAndPush
-#     repository: prashasthnaik/eureka
-#     dockerfile: eureka-server/Dockerfile
-#     tags: latest
+- task: Docker@2
+  displayName: Eureka - Build & Push
+  inputs:
+    command: buildAndPush
+    containerRegistry: dockerhub
+    repository: prashasthnaik/eureka
+    dockerfile: eureka-server/Dockerfile
+    tags: latest
 
 
 # ================= Frontend =================
@@ -45,13 +46,14 @@ steps:
   workingDirectory: frontend
   displayName: Frontend - Build & Test
 
-# - task: Docker@2
-#   displayName: Frontend - Build & Push
-#   inputs:
-#     command: buildAndPush
-#     repository: prashasthnaik/frontend
-#     dockerfile: frontend/Dockerfile
-#     tags: latest
+- task: Docker@2
+  displayName: Frontend - Build & Push
+  inputs:
+    command: buildAndPush
+    containerRegistry: dockerhub
+    repository: prashasthnaik/frontend
+    dockerfile: frontend/Dockerfile
+    tags: latest
 
 
 # ================= Order Service =================
@@ -60,13 +62,14 @@ steps:
   workingDirectory: order-service
   displayName: Order Service - Run Tests
 
-# - task: Docker@2
-#   displayName: Order Service - Build & Push
-#   inputs:
-#     command: buildAndPush
-#     repository: prashasthnaik/order
-#     dockerfile: order-service/Dockerfile
-#     tags: latest
+- task: Docker@2
+  displayName: Order Service - Build & Push
+  inputs:
+    command: buildAndPush
+    containerRegistry: dockerhub
+    repository: prashasthnaik/order
+    dockerfile: order-service/Dockerfile
+    tags: latest
 
 
 # ================= Product Service =================
@@ -75,13 +78,14 @@ steps:
   workingDirectory: product-service
   displayName: Product Service - Run Tests
 
-# - task: Docker@2
-#   displayName: Product Service - Build & Push
-#   inputs:
-#     command: buildAndPush
-#     repository: prashasthnaik/product
-#     dockerfile: product-service/Dockerfile
-#     tags: latest
+- task: Docker@2
+  displayName: Product Service - Build & Push
+  inputs:
+    command: buildAndPush
+    containerRegistry: dockerhub
+    repository: prashasthnaik/product
+    dockerfile: product-service/Dockerfile
+    tags: latest
 
 
 # ================= User Service =================
@@ -90,10 +94,11 @@ steps:
   workingDirectory: user-service
   displayName: User Service - Run Tests
 
-# - task: Docker@2
-#   displayName: User Service - Build & Push
-#   inputs:
-#     command: buildAndPush
-#     repository: prashasthnaik/user
-#     dockerfile: user-service/Dockerfile
-#     tags: latest
+- task: Docker@2
+  displayName: User Service - Build & Push
+  inputs:
+    command: buildAndPush
+    containerRegistry: dockerhub
+    repository: prashasthnaik/user
+    dockerfile: user-service/Dockerfile
+    tags: latest
