@@ -102,3 +102,36 @@ steps:
     repository: prashasthnaik/user
     dockerfile: user-service/Dockerfile
     tags: latest
+
+
+# ================= Collect Test Reports =================
+
+- script: |
+    mkdir test-reports
+
+    cp -r api-gateway/target/surefire-reports test-reports/api-gateway || true
+    cp -r eureka-server/target/surefire-reports test-reports/eureka || true
+    cp -r order-service/target/surefire-reports test-reports/order || true
+    cp -r product-service/target/surefire-reports test-reports/product || true
+    cp -r user-service/target/surefire-reports test-reports/user || true
+    cp -r frontend/coverage test-reports/frontend || true
+
+  displayName: Collect test reports
+
+
+# ================= Commit & Push to BOTH repos =================
+
+- script: |
+    git config user.email "pipeline@azure.com"
+    git config user.name "Azure Pipeline"
+
+    git add test-reports azure-pipelines.yml
+    git commit -m "Auto update test reports [CI]" || echo "Nothing to commit"
+
+    # Push to Azure DevOps repo
+    git push origin main
+
+    # Push to GitHub repo
+    git push https://$(GITHUB_TOKEN)@github.com/prashasth2002naik/Ecommerce-microservices-updated.git main
+
+  displayName: Sync reports to Azure DevOps + GitHub
