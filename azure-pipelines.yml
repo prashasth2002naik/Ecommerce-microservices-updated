@@ -127,9 +127,9 @@ steps:
     git config user.name "Azure Pipeline"
 
     git add test-reports
-    git commit -m "Auto update test reports [CI]" -ErrorAction SilentlyContinue
+    git commit -m "Auto update test reports [CI]" 2>$null
 
     git push origin HEAD
-    git push https://$(GITHUB_TOKEN)@github.com/prashasth2002naik/Ecommerce-microservices-updated.git HEAD
+    git push https://$env:GITHUB_TOKEN@github.com/prashasth2002naik/Ecommerce-microservices-updated.git HEAD
 
   displayName: Sync reports automatically
