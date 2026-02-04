@@ -104,19 +104,20 @@ steps:
     tags: latest
 
 
-# ================= Collect Test Reports =================
+# ================= Collect Test Reports (Windows) =================
 
-- script: |
-    mkdir test-reports
+- powershell: |
+    New-Item -ItemType Directory -Force -Path test-reports
 
-    cp -r api-gateway/target/surefire-reports test-reports/api-gateway || true
-    cp -r eureka-server/target/surefire-reports test-reports/eureka || true
-    cp -r order-service/target/surefire-reports test-reports/order || true
-    cp -r product-service/target/surefire-reports test-reports/product || true
-    cp -r user-service/target/surefire-reports test-reports/user || true
-    cp -r frontend/coverage test-reports/frontend || true
+    Copy-Item api-gateway\target\surefire-reports test-reports\api-gateway -Recurse -Force -ErrorAction SilentlyContinue
+    Copy-Item eureka-server\target\surefire-reports test-reports\eureka -Recurse -Force -ErrorAction SilentlyContinue
+    Copy-Item order-service\target\surefire-reports test-reports\order -Recurse -Force -ErrorAction SilentlyContinue
+    Copy-Item product-service\target\surefire-reports test-reports\product -Recurse -Force -ErrorAction SilentlyContinue
+    Copy-Item user-service\target\surefire-reports test-reports\user -Recurse -Force -ErrorAction SilentlyContinue
+    Copy-Item frontend\coverage test-reports\frontend -Recurse -Force -ErrorAction SilentlyContinue
 
-  displayName: Collect test reports
+  displayName: Collect test reports (Windows)
+
 
 
 # ================= Commit & Push to BOTH repos =================
