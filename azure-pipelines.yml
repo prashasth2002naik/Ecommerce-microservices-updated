@@ -122,16 +122,16 @@ steps:
 
 # ================= Commit & Push to BOTH repos =================
 
-- powershell: |
-    git checkout main
+# - powershell: |
+#     git checkout main
 
-    git config user.email "pipeline@azure.com"
-    git config user.name "Azure Pipeline"
+#     git config user.email "pipeline@azure.com"
+#     git config user.name "Azure Pipeline"
 
-    git add test-reports
-    git commit -m "Auto update test reports [CI]" 2>$null
+#     git add test-reports
+#     git commit -m "Auto update test reports [CI]" 2>$null
 
-    git push origin main
-    git push https://$env:GITHUB_TOKEN@github.com/prashasth2002naik/Ecommerce-microservices-updated.git main
+#     git push origin main
+#     git push https://$env:GITHUB_TOKEN@github.com/prashasth2002naik/Ecommerce-microservices-updated.git main
 
-  displayName: Sync reports automatically
+#   displayName: Sync reports automatically
