@@ -122,17 +122,14 @@ steps:
 
 # ================= Commit & Push to BOTH repos =================
 
-- script: |
+- powershell: |
     git config user.email "pipeline@azure.com"
     git config user.name "Azure Pipeline"
 
-    git add test-reports azure-pipelines.yml
-    git commit -m "Auto update test reports [CI]" || echo "Nothing to commit"
+    git add test-reports
+    git commit -m "Auto update test reports [CI]" -ErrorAction SilentlyContinue
 
-    # Push to Azure DevOps repo
-    git push origin main
+    git push origin HEAD
+    git push https://$(GITHUB_TOKEN)@github.com/prashasth2002naik/Ecommerce-microservices-updated.git HEAD
 
-    # Push to GitHub repo
-    git push https://$(GITHUB_TOKEN)@github.com/prashasth2002naik/Ecommerce-microservices-updated.git main
-
-  displayName: Sync reports to Azure DevOps + GitHub
+  displayName: Sync reports automatically
